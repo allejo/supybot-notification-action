@@ -1,11 +1,13 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Supybot IRC Messages Action'
+description: 'Send an IRC message to a Supybot instance'
+author: 'Vladimir "allejo" Jimenez'
 inputs:
-  milliseconds: # change this
+  hostname:
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: 'The hostname and port of the Supybot instance'
+  credentials:
+    required: true
+    description: 'Basic authentication; e.g. `username:password` or `password`'
 runs:
   using: 'node12'
   main: 'dist/index.js'

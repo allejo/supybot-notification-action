@@ -38,5 +38,11 @@ describe('Markup Parser', () => {
 
             expect(actual).toEqual("Ugh fine, I guess you \u0009are\u000f my little PogChamp");
         });
+
+        it('should bold and color a word', () => {
+            const actual = formatStr("OOPSIE WOOPSIE!! Uwu We made a <turquoise:pink><bold>fudgy wudgy!!</bold></turquoise:pink> A wittle pucko boingo!");
+
+            expect(actual).toEqual("OOPSIE WOOPSIE!! Uwu We made a \u000310,13\u0002fudgy wudgy!!\u000f\u000f A wittle pucko boingo!");
+        });
     });
 });

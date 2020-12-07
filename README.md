@@ -36,8 +36,8 @@ The following color directives are availale to change the color of messages:
 - `<orange>`
 - `<yellow>`
 - `<limegreen>`
-- `<turquise>`
 - `<cyan>`
+- `<lightcyan>`
 - `<lightblue>`
 - `<pink>`
 - `<grey>`

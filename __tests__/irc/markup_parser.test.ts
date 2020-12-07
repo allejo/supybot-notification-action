@@ -8,8 +8,8 @@ describe('Markup Parser', () => {
     
             expect(directives).toEqual([
                 ['green', 'simple'],
-                ['bold', 'me'],
                 ['yellow:black', '<bold>me</bold>'],
+                ['bold', 'me'],
             ]);
         });
     });
@@ -38,5 +38,12 @@ describe('Markup Parser', () => {
 
             expect(actual).toEqual("Ugh fine, I guess you \u001dare\u000f my little PogChamp");
         });
+
+        it('should bold and color a word', () => {
+            const actual = formatStr("OOPSIE WOOPSIE!! Uwu We made a <white:pink><bold>fudgy wudgy!!</bold></white:pink> A wittle pucko boingo!");
+
+            expect(actual).toEqual("OOPSIE WOOPSIE!! Uwu We made a \u000300,13\u0002fudgy wudgy!!\u000f\u000f A wittle pucko boingo!");
+        });
+        
     });
 });

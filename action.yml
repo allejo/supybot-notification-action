@@ -8,6 +8,12 @@ inputs:
   credentials:
     required: true
     description: 'Basic authentication; e.g. `username:password` or `password`'
+  channel:
+    required: true
+    description: 'The IRC channel to send this message to'
+  message:
+    required: true
+    description: 'The message to send'
 runs:
   using: 'node12'
   main: 'dist/index.js'

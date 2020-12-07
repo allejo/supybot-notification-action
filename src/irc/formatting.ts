@@ -1,3 +1,6 @@
+// Using Colors and Control Codes from
+//   https://modern.ircdocs.horse/formatting.html
+
 export enum Color {
     Transparent = -1,
     White = 0,
@@ -10,8 +13,8 @@ export enum Color {
     Orange = 7,
     Yellow = 8,
     LimeGreen = 9,
-    Turquoise = 10,
-    Cyan = 11,
+    Cyan = 10,
+    LightCyan = 11,
     LightBlue = 12,
     Pink = 13,
     Grey = 14,
@@ -22,9 +25,8 @@ export enum ControlCode {
     Bold          = 0x02,
     Color         = 0x03,
     Italic        = 0x1D,
-    StrikeThrough = 0x13,
+    StrikeThrough = 0x1e,
     Reset         = 0x0f,
-    Underline2    = 0x15,
     Underline     = 0x1f,
     Reverse       = 0x16,
 }

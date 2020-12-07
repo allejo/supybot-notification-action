@@ -30,9 +30,15 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getMessagesToSend = void 0;
 const core = __importStar(__webpack_require__(186));
 const github = __importStar(__webpack_require__(438));
+function getServerUrl() {
+    // Stolen from @actions/checkout
+    //   https://github.com/actions/checkout/blob/c952173edf28a2bd22e1a4926590c1ac39630461/src/url-helper.ts
+    return (process.env['GITHUB_SERVER_URL'] ||
+        process.env['GITHUB_URL'] ||
+        'https://github.com');
+}
 function getMessagesToSend() {
     var _a, _b;
-    const context = github.context;
     const messages = [];
     let msg, channel;
     if ((msg = core.getInput('message')) &&
@@ -65,10 +71,11 @@ function getMessagesToSend() {
         if (!isExplicit) {
             core.warning('Defaulting to `default_message` is true.');
         }
+        const context = github.context;
         const { actor, repo: { owner, repo: repoName }, runId, job, } = context;
         const ref = context.ref.split('/').slice(-1).pop();
         const sha = context.sha.substring(0, 6);
-        const actionsURL = `https://github.com/${owner}/${repoName}/runs/${runId}`;
+        const actionsURL = `${getServerUrl()}/${owner}/${repoName}/actions/runs/${runId}`;
         let commitMessage = '';
         let status;
         if (job === 'success') {
@@ -84,8 +91,7 @@ function getMessagesToSend() {
             status = 'status unknown';
         }
         if (context.eventName === 'push') {
-            const pushPayload = github.context
-                .payload;
+            const pushPayload = context.payload;
             const message = (_b = pushPayload.commits) === null || _b === void 0 ? void 0 : _b[0].message;
             if (message) {
                 commitMessage = `${message} - `;

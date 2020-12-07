@@ -8,8 +8,17 @@ interface Condition {
 	channel?: string;
 }
 
+function getServerUrl(): string {
+	// Stolen from @actions/checkout
+	//   https://github.com/actions/checkout/blob/c952173edf28a2bd22e1a4926590c1ac39630461/src/url-helper.ts
+	return (
+		process.env['GITHUB_SERVER_URL'] ||
+		process.env['GITHUB_URL'] ||
+		'https://github.com'
+	);
+}
+
 export function getMessagesToSend(): [string, string][] {
-	const context = github.context;
 	const messages: [string, string][] = [];
 
 	let msg, channel;
@@ -53,6 +62,7 @@ export function getMessagesToSend(): [string, string][] {
 			core.warning('Defaulting to `default_message` is true.');
 		}
 
+		const context = github.context;
 		const {
 			actor,
 			repo: { owner, repo: repoName },
@@ -61,7 +71,7 @@ export function getMessagesToSend(): [string, string][] {
 		} = context;
 		const ref = context.ref.split('/').slice(-1).pop();
 		const sha = context.sha.substring(0, 6);
-		const actionsURL = `https://github.com/${owner}/${repoName}/runs/${runId}`;
+		const actionsURL = `${getServerUrl()}/${owner}/${repoName}/actions/runs/${runId}`;
 		let commitMessage = '';
 		let status: string;
 
@@ -76,8 +86,7 @@ export function getMessagesToSend(): [string, string][] {
 		}
 
 		if (context.eventName === 'push') {
-			const pushPayload = github.context
-				.payload as Webhooks.EventPayloads.WebhookPayloadPush;
+			const pushPayload = context.payload as Webhooks.EventPayloads.WebhookPayloadPush;
 			const message = pushPayload.commits?.[0].message;
 
 			if (message) {

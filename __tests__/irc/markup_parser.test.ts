@@ -8,8 +8,8 @@ describe('Markup Parser', () => {
     
             expect(directives).toEqual([
                 ['green', 'simple'],
-                ['bold', 'me'],
                 ['yellow:black', '<bold>me</bold>'],
+                ['bold', 'me'],
             ]);
         });
     });

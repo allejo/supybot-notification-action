@@ -18,6 +18,28 @@ export enum Color {
     LightGrey = 15,
 }
 
+export const ColorDictionary: Record<string, Color> = {
+    Transparent: Color.Transparent,
+    White: Color.White,
+    Black: Color.Black,
+    Blue: Color.Blue,
+    Green: Color.Green,
+    Red: Color.Red,
+    Brown: Color.Brown,
+    Purple: Color.Purple,
+    Orange: Color.Orange,
+    Yellow: Color.Yellow,
+    LimeGreen: Color.LimeGreen,
+    Turquise: Color.Turquise,
+    Cyan: Color.Cyan,
+    LightBlue: Color.LightBlue,
+    Pink: Color.Pink,
+    Grey: Color.Grey,
+    LightGrey: Color.LightGrey,
+};
+
+Object.freeze(ColorDictionary);
+
 export enum ControlCode {
     Bold          = 0x02,
     Color         = 0x03,
@@ -28,6 +50,17 @@ export enum ControlCode {
     Underline     = 0x1f,
     Reverse       = 0x16,
 }
+
+export const ControlCodeDictionary: Record<string, ControlCode> = {
+    Bold: ControlCode.Bold,
+    Color: ControlCode.Color,
+    Italic: ControlCode.Italic,
+    StrikeThrough: ControlCode.StrikeThrough,
+    Underline: ControlCode.Underline,
+    Underline2: ControlCode.Underline2,
+};
+
+Object.freeze(ControlCodeDictionary);
 
 function padNumber(value: number, size: number, padding: string = '0'): string {
     return (padding.repeat(size) + String(value)).substr(-size);

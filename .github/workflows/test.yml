@@ -9,10 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    outputs:
-      success: ${{ steps.set-outputs.outputs.success }}
-      failure: ${{ steps.set-outputs.outputs.failure }}
-      cancelled: ${{ steps.set-outputs.outputs.cancelled }}
     steps:
       - uses: actions/checkout@v2
       - name: Install Dependencies
@@ -21,37 +17,11 @@ jobs:
       - name: Run all our commands
         run: |
           npm run all
-      - name: Set Outputs
-        if: always()
-        id: set-outputs
-        run: |
-          echo "::set-output name=success::${{ success() }}"
-          echo "::set-output name=failure::${{ failure() }}"
-          echo "::set-output name=cancelled::${{ cancelled() }}"
-
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/checkout@v2
       - name: Sample IRC Notification
+        if: always()
         uses: ./
         with:
           hostname: ${{ secrets.SUPYBOT_HOST }}
           credentials: ${{ secrets.SUPYBOT_PASSWORD }}
           channel: '#sujevo-dev'
-          messages: |
-            [
-              {
-                "condition": ${{ needs.build.outputs.success }},
-                "message": "The build <green>passed</green>"
-              },
-              {
-                "condition": ${{ needs.build.outputs.failure }},
-                "message": "The build <red>failed</red>"
-              },
-              {
-                "condition": ${{ needs.build.outputs.cancelled }},
-                "message": "The build was <grey>cancelled</grey>"
-              }
-            ]
+          default_message: true

@@ -33,7 +33,7 @@ const ColorDirectives: Record<string, Color> = {
     orange: Color.Orange,
     yellow: Color.Yellow,
     limegreen: Color.LimeGreen,
-    turquise: Color.Turquise,
+    turquoise: Color.Turquoise,
     cyan: Color.Cyan,
     lightblue: Color.LightBlue,
     pink: Color.Pink,

@@ -10,7 +10,7 @@ export enum Color {
     Orange = 7,
     Yellow = 8,
     LimeGreen = 9,
-    Turquise = 10,
+    Turquoise = 10,
     Cyan = 11,
     LightBlue = 12,
     Pink = 13,

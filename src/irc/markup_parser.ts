@@ -11,11 +11,12 @@ export function extractDirectives(str: string): [string, string][] {
         const body = match[2];
         const subDirectives = extractDirectives(body);
 
+        results.push([directive, body]);
+
         if (subDirectives.length > 0) {
             results.push(...subDirectives);
         }
-
-        results.push([directive, body]);
+        
     }
 
     return results;

@@ -175,7 +175,7 @@ exports.applyControl = applyControl;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.formatStr = exports.extractDirectives = void 0;
 const formatting_1 = __webpack_require__(229);
-const DIRECTIVE_RE = /<([a-zA-Z:]+)>([^\n]+)<\/\1>/gm;
+const DIRECTIVE_RE = /<([a-zA-Z:]+)>([^\n]+?)<\/\1>/gm;
 function extractDirectives(str) {
     const results = [];
     const matches = str.matchAll(DIRECTIVE_RE);

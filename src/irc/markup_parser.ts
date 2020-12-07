@@ -5,7 +5,7 @@ import {
 	IRCControlCode,
 } from './formatting';
 
-const DIRECTIVE_RE = /<([a-zA-Z:]+)>([^\n]+)<\/\1>/gm;
+const DIRECTIVE_RE = /<([a-zA-Z:]+)>([^\n]+?)<\/\1>/gm;
 
 export function extractDirectives(str: string): [string, string][] {
 	const results: [string, string][] = [];

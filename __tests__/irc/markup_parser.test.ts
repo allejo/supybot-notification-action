@@ -13,6 +13,18 @@ describe('Markup Parser', () => {
 				['bold', 'me'],
 			]);
 		});
+
+		it('should handle multiple of the same directives separately', () => {
+			const input =
+				"I'm <blue>blue</blue> da <blue>ba</blue> dee da <blue>ba die</blue>";
+			const directives = extractDirectives(input);
+
+			expect(directives).toEqual([
+				['blue', 'blue'],
+				['blue', 'ba'],
+				['blue', 'ba die'],
+			]);
+		});
 	});
 
 	describe('formatStr function', () => {

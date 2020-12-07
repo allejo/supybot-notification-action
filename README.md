@@ -9,6 +9,7 @@ A GitHub Actions action that lets you send notifications to a [Limnoria (fka Sup
 ```yaml
 - name: Send IRC notification
   uses: allejo/supybot-notification-action@v1
+  if: always()
   with:
     status: ${{ job.status }}
     hostname: 'supybothost.com:8090'
@@ -34,6 +35,7 @@ To send a single IRC message, you may use the `message` parameter and use [messa
 ```yaml
 - name: Send IRC notification
   uses: allejo/supybot-notification-action@v1
+  if: always()
   with:
     status: ${{ job.status }}
     hostname: 'supybothost.com:8090'
@@ -49,6 +51,7 @@ To send multiple messages to separate channels or messages based on conditions, 
 ```yaml
 - name: Send IRC notification
   uses: allejo/supybot-notification-action@v1
+  if: always()
   with:
     status: ${{ job.status }}
     hostname: 'supybothost.com:8090'

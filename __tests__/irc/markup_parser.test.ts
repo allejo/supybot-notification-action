@@ -36,7 +36,7 @@ describe('Markup Parser', () => {
         it('should handle italics with <italic>', () => {
             const actual = formatStr("Ugh fine, I guess you <italic>are</italic> my little PogChamp");
 
-            expect(actual).toEqual("Ugh fine, I guess you \u0009are\u000f my little PogChamp");
+            expect(actual).toEqual("Ugh fine, I guess you \u001dare\u000f my little PogChamp");
         });
     });
 });

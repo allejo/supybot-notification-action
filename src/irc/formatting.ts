@@ -21,7 +21,7 @@ export enum Color {
 export enum ControlCode {
     Bold          = 0x02,
     Color         = 0x03,
-    Italic        = 0x09,
+    Italic        = 0x1D,
     StrikeThrough = 0x13,
     Reset         = 0x0f,
     Underline2    = 0x15,

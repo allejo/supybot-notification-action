@@ -44,5 +44,6 @@ describe('Markup Parser', () => {
 
             expect(actual).toEqual("OOPSIE WOOPSIE!! Uwu We made a \u000310,13\u0002fudgy wudgy!!\u000f\u000f A wittle pucko boingo!");
         });
+        
     });
 });

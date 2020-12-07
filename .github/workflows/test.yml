@@ -24,4 +24,5 @@ jobs:
           hostname: ${{ secrets.SUPYBOT_HOST }}
           credentials: ${{ secrets.SUPYBOT_PASSWORD }}
           channel: '#sujevo-dev'
+          status: ${{ job.status }}
           default_message: true

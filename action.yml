@@ -9,11 +9,17 @@ inputs:
     required: true
     description: 'Basic authentication; e.g. `username:password` or `password`'
   channel:
-    required: true
+    required: false
     description: 'The IRC channel to send this message to'
   message:
-    required: true
+    required: false
     description: 'The message to send'
+  messages:
+    required: false
+    description: 'A JSON array of message options to send'
+  default_message:
+    required: false
+    description: 'Send a built-in message about the job status'
 runs:
   using: 'node12'
   main: 'dist/index.js'

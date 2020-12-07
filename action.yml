@@ -12,7 +12,7 @@ inputs:
     required: false
     description: 'The IRC channel to send this message to'
   status:
-    required: true
+    required: false
     description: 'You must manually specify the job status: success, failure, cancelled'
   message:
     required: false

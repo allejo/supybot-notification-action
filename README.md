@@ -1,101 +1,59 @@
 <p align="center">
-  <a href="https://github.com/actions/typescript-action/actions"><img alt="typescript-action status" src="https://github.com/actions/typescript-action/workflows/build-test/badge.svg"></a>
+  <a href="https://github.com/allejo/supybot-notification-action/actions"><img alt="typescript-action status" src="https://github.com/allejo/supybot-notification-action/workflows/build-test/badge.svg"></a>
 </p>
 
-# Create a JavaScript Action using TypeScript
+# Supybot Notification Action
 
-Use this template to bootstrap the creation of a TypeScript action.:rocket:
+A GitHub Actions action that lets you send notifications to a [Limnoria (fka Supybot)](https://github.com/ProgVal/Limnoria) instance.
 
-This template includes compilation support, tests, a validation workflow, publishing, and versioning guidance.  
-
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
-
-## Create an action from this template
-
-Click the `Use this Template` and provide the new repo details for your action
-
-## Code in Main
-
-Install the dependencies  
-```bash
-$ npm install
-```
-
-Build the typescript and package it for distribution
-```bash
-$ npm run build && npm run package
-```
-
-Run the tests :heavy_check_mark:  
-```bash
-$ npm test
-
- PASS  ./index.test.js
-  ✓ throws invalid number (3ms)
-  ✓ wait 500 ms (504ms)
-  ✓ test runs (95ms)
-
-...
-```
-
-## Change action.yml
-
-The action.yml contains defines the inputs and output for your action.
-
-Update the action.yml with your name, description, inputs and outputs for your action.
-
-See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
-
-## Change the Code
-
-Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
-
-```javascript
-import * as core from '@actions/core';
-...
-
-async function run() {
-  try { 
-      ...
-  } 
-  catch (error) {
-    core.setFailed(error.message);
-  }
-}
-
-run()
-```
-
-See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
-
-## Publish to a distribution branch
-
-Actions are run from GitHub repos so we will checkin the packed dist folder. 
-
-Then run [ncc](https://github.com/zeit/ncc) and push the results:
-```bash
-$ npm run package
-$ git add dist
-$ git commit -a -m "prod dependencies"
-$ git push origin releases/v1
-```
-
-Your action is now published! :rocket: 
-
-See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
-
-## Validate
-
-You can now validate the action by referencing `./` in a workflow in your repo (see [test.yml](.github/workflows/test.yml))
+## Usage
 
 ```yaml
-uses: ./
-with:
-  milliseconds: 1000
+- uses: allejo/supybot-notification-action@v1
+  with:
+    hostname: 'supybothost.com:8090' # Optional custom port
+    credentials: ${{ secrets.SUPYBOT_PASSWORD }}
+    channel: '#my-channel'
+    message: 'Build by ${{ github.actor }} <green>passed</green>'
 ```
 
-See the [actions tab](https://github.com/actions/javascript-action/actions) for runs of this action! :rocket:
+### Message Formatting
 
-## Usage:
+You can control how the formatting of messages will appear with HTML-like markup (e.g. `<directive>content</directive>`).
 
-After testing you can [create a v1 tag](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md) to reference the stable and latest V1 action
+#### Colors
+
+The following color directives are availale to change the color of messages:
+
+- `<transparent>`
+- `<white>`
+- `<black>`
+- `<blue>`
+- `<green>`
+- `<red>`
+- `<brown>`
+- `<purple>`
+- `<orange>`
+- `<yellow>`
+- `<limegreen>`
+- `<turquise>`
+- `<cyan>`
+- `<lightblue>`
+- `<pink>`
+- `<grey>`
+- `<lightgrey>`
+
+For background colors, use the optional `:color` syntax. For example, if you would like to have a black background with white text, you would use `<white:black>my white text with a black background</white:black>`.
+
+#### Format
+
+The following formatting directives are available:
+
+- `<bold>`
+- `<italic>`
+- `<strike>`
+- `<underline>`
+
+## License
+
+[MIT](./LICENSE)

@@ -1,8 +1,6 @@
-const DIRECTIVE_RE = /<(\w+)>([^\n]+)<\/\1>/m;
+import { applyColor, applyControl, Color, ControlCode } from "./formatting";
 
-function hasDirectives(str: string): boolean {
-    return DIRECTIVE_RE.test(str);
-}
+const DIRECTIVE_RE = /<([a-zA-Z:]+)>([^\n]+)<\/\1>/gm;
 
 export function extractDirectives(str: string): [string, string][] {
     const results: [string, string][] = [];
@@ -11,9 +9,10 @@ export function extractDirectives(str: string): [string, string][] {
     for (const match of matches) {
         const directive = match[1];
         const body = match[2];
+        const subDirectives = extractDirectives(body);
 
-        if (hasDirectives(body)) {
-            results.push(...extractDirectives(body));
+        if (subDirectives.length > 0) {
+            results.push(...subDirectives);
         }
 
         results.push([directive, body]);
@@ -22,6 +21,51 @@ export function extractDirectives(str: string): [string, string][] {
     return results;
 }
 
-export function applyFormatting(str: string): string {
-    return "";
+const ColorDirectives: Record<string, Color> = {
+    transparent: Color.Transparent,
+    white: Color.White,
+    black: Color.Black,
+    blue: Color.Blue,
+    green: Color.Green,
+    red: Color.Red,
+    brown: Color.Brown,
+    purple: Color.Purple,
+    orange: Color.Orange,
+    yellow: Color.Yellow,
+    limegreen: Color.LimeGreen,
+    turquise: Color.Turquise,
+    cyan: Color.Cyan,
+    lightblue: Color.LightBlue,
+    pink: Color.Pink,
+    grey: Color.Grey,
+    lightgrey: Color.LightGrey,
+};
+
+const FormatDirectives: Record<string, ControlCode> = {
+    bold: ControlCode.Bold,
+    italic: ControlCode.Italic,
+    strike: ControlCode.StrikeThrough,
+    underline: ControlCode.Underline,
+};
+
+function applyDirective(str: string, directiveTuple: [string, string]): string {
+    const [directive, body] = directiveTuple;
+    const replaceTarget = `<${directive}>${body}</${directive}>`;
+    const [fg, bg] = directive.split(':');
+    let result: string = body;
+
+    if (ColorDirectives.hasOwnProperty(fg)) {
+        result = applyColor(body, ColorDirectives[fg], ColorDirectives[bg]);
+    } else if (FormatDirectives.hasOwnProperty(fg)) {
+        result = applyControl(body, FormatDirectives[fg]);
+    }
+
+    return str.replace(replaceTarget, result);
+}
+
+export function formatStr(str: string): string {
+    return extractDirectives(str).reduce(
+        (str, directive) => applyDirective(str, directive),
+        str,
+    );
 }

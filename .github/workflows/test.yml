@@ -15,10 +15,14 @@ jobs:
           npm install
       - run: |
           npm run all
-  test: # make sure the action works on a clean machine without building
+
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: ./
         with:
-          milliseconds: 1000
+          hostname: ${{ secrets.SUPYBOT_HOST }}
+          credentials: ${{ secrets.SUPYBOT_PASSWORD }}
+          channel: '#sujevo-dev'
+          message: "I'm sending a sample message saying I <green>worked</green>!"

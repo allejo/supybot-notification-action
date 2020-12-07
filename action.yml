@@ -13,7 +13,7 @@ inputs:
     description: 'The IRC channel to send this message to'
   status:
     required: true
-    description: 'You must manually specify the job status with `${{ job.status }}`'
+    description: 'You must manually specify the job status with `\${{ job.status }}`'
   message:
     required: false
     description: 'The message to send'

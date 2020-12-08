@@ -73,7 +73,7 @@ function getMessagesToSend() {
         }
         const context = github.context;
         const { actor, repo: { owner, repo: repoName }, runId, } = context;
-        const ref = context.ref.split('/').slice(3).join('/');
+        const ref = context.ref.replace(/\/refs\/\w+\//, '');
         const sha = context.sha.substring(0, 6);
         const actionsURL = `${getServerUrl()}/${owner}/${repoName}/actions/runs/${runId}`;
         const job = core.getInput('status', { required: true });

@@ -68,7 +68,7 @@ export function getMessagesToSend(): [string, string][] {
 			repo: { owner, repo: repoName },
 			runId,
 		} = context;
-		const ref = context.ref.split('/').slice(-1).pop();
+		const ref = context.ref.split('/').slice(3).join('/');
 		const sha = context.sha.substring(0, 6);
 		const actionsURL = `${getServerUrl()}/${owner}/${repoName}/actions/runs/${runId}`;
 		const job = core.getInput('status', { required: true });

@@ -95,7 +95,7 @@ function getMessagesToSend() {
             const pushPayload = context.payload;
             const message = (_b = pushPayload.commits) === null || _b === void 0 ? void 0 : _b[0].message;
             if (message) {
-                commitMessage = `${message} - `;
+                commitMessage = `<grey>${message}</grey> - `;
             }
         }
         const message = `<blue>${ref}</blue> @ ${repoName}: <green>${actor}</green> ${sha}: build ${status} [${commitMessage}${actionsURL}]`;

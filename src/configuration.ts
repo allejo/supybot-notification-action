@@ -90,7 +90,7 @@ export function getMessagesToSend(): [string, string][] {
 			const message = pushPayload.commits?.[0].message;
 
 			if (message) {
-				commitMessage = `${message} - `;
+				commitMessage = `<grey>${message}</grey> - `;
 			}
 		}
 

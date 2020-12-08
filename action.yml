@@ -1,6 +1,9 @@
 name: 'Supybot IRC Messages Action'
 description: 'Send an IRC message to a Supybot instance'
 author: 'Vladimir "allejo" Jimenez'
+branding:
+  icon: 'message-square'
+  color: 'orange'
 inputs:
   hostname:
     required: true
